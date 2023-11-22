@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
 
     public void GoLeft()
     {
+        //Debug.Log("Go left\n");
         if (AnimInfo("isGrounded"))
         {
             PlayerAnim.SetBool("isRunning", true);
@@ -45,9 +46,10 @@ public class Player : MonoBehaviour
         transform.Translate(runningSpeed * Time.deltaTime, 0, 0);
     }
 
-
+    
     public void GoRight()
     {
+        //Debug.Log("Go right\n");
         if (AnimInfo("isGrounded"))
         {
             PlayerAnim.SetBool("isRunning", true);
@@ -64,6 +66,7 @@ public class Player : MonoBehaviour
     {
         if (canJump)
         {
+            Debug.Log("Go jump\n");
             PlayerAnim.SetTrigger("Jump");
             PlayerAnim.SetBool("isGrounded", false);
             PlayerAnim.SetBool("isRunning", false);
@@ -87,9 +90,9 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("platform"))
         {
-            //Debug.Log("hit the ground");
+            Debug.Log("hit the ground");
             PlayerAnim.SetBool("isGrounded", true);
         }
         else if (other.gameObject.CompareTag("Obstacle")){
