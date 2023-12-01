@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Rigidbody2D playerRb;
 
+    [SerializeField] ScoreManager scoreManager;
+
     private Vector3 startPosition;
     private Quaternion startRotation;
 
@@ -29,6 +31,11 @@ public class Player : MonoBehaviour
 
     playerRb = GetComponent<Rigidbody2D>();
     
+    }
+
+    public float PlayerPosInX()
+    {
+        return transform.position.x;
     }
 
     public void GoLeft()
@@ -88,18 +95,6 @@ public class Player : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("platform"))
-        {
-            Debug.Log("hit the ground");
-            PlayerAnim.SetBool("isGrounded", true);
-        }
-        else if (other.gameObject.CompareTag("Obstacle")){
-            Debug.Log("can't jump");
-            PlayerAnim.ResetTrigger("Jump");
-        }
-    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -108,7 +103,22 @@ public class Player : MonoBehaviour
             Debug.Log("can't jump");
             canJump = false;
             PlayerAnim.ResetTrigger("Jump");
+            scoreManager.CollideObstacle();
+
+
         }
+        if (other.gameObject.CompareTag("platform"))
+        {
+            Debug.Log("hit the platform");
+            PlayerAnim.SetBool("isGrounded", true);
+        }
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            Debug.Log("hit the ground");
+            PlayerAnim.SetBool("isGrounded", true);
+        }
+
+        //on platform
     }
 
     private void OnCollisionExit2D(Collision2D other)

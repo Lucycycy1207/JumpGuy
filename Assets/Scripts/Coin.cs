@@ -8,6 +8,7 @@ public class Coin : MonoBehaviour
     [SerializeField] Renderer coinRenderer;
     [SerializeField] BoxCollider2D coinCollider;
     [SerializeField] AudioSource collectCoin;
+    [SerializeField] ScoreManager scoreManager;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -15,7 +16,8 @@ public class Coin : MonoBehaviour
             coinRenderer.enabled = false;
             coinCollider.enabled = false;
             collectCoin.enabled = true;
-            Debug.Log("collect the coin");
+            //Debug.Log("collect the coin");
+            scoreManager.CollectingCoin();
         }
     }
 }
