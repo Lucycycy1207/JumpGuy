@@ -3501,7 +3501,7 @@ MonoBehaviour:
   player: {fileID: 611889965}
   LoadingPointX: 45
   scene: {fileID: 270969749}
-  LoadingScenePoint: 66.2
+  LoadingScenePoint: 66
 --- !u!4 &1414445014
 Transform:
   m_ObjectHideFlags: 0
